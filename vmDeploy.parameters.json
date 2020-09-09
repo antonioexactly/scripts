@@ -1,0 +1,59 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "envParameters":{
+            "value":{
+                "General":{
+                    
+                        "customerName": "EIT",
+                        "customerID": "eit",
+                        "location": "eastus1",
+                        "locationName": "we1",
+                        "environment": "prd"
+                        
+                    
+                },
+                "tags": {
+                    
+                        "customerName": "ExactlyIT",
+                        "environment": "test"
+                        
+                        
+                },
+                "VM":{
+                    
+                        "VMID":  "01",
+                        "VMSize":  "Standard_D2_v3",
+                        "VMUserName":  "testuser",
+                        "VMPassword":  "YourPassword123.",
+                        "OS":"linux",
+                        "OperatingSystemSpec": {
+                            "imagePublisher": "SUSE",
+                            "imageOffer": "SLES-SAP",
+                            "sku": "12-SP4"
+                        },
+                        "diskReference":128,
+                        "storageAccountName":""
+                       
+                
+                },
+
+                "Network":{
+                
+                        "NetworkName":  "lab-spk-vnet",
+                        "SubnetName":  "Applications",
+                        "NetworkResourceGroup":"lab-net-rg"
+                
+                },
+
+                "Info":{
+                
+                        "appID": "ad"
+                        
+                
+                }
+            }
+        }
+    }
+}

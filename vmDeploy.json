@@ -1,0 +1,124 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "envParameters": {
+            "type": "object"
+        }
+    },
+  "variables": {
+
+    "networkinterfacename": "[toLower(concat(parameters('envParameters').General.CustomerID, '-', 
+        parameters('envParameters').Info.appID, '-', 
+        first(parameters('envParameters').general.environment), 
+        first(parameters('envParameters').VM.OS), 
+        '-', parameters('envParameters').VM.VMID,'-nic'))]",
+    "asets": "[toLower(concat(parameters('envParameters').General.CustomerID, '-', 
+        parameters('envParameters').VM.VMID, '-' ,
+        first(parameters('envParameters').general.environment),'-aset'))]",
+    "vmname": "[toLower(concat(parameters('envParameters').General.CustomerID, '-', 
+        parameters('envParameters').Info.appID, '-', 
+        first(parameters('envParameters').general.environment), 
+        first(parameters('envParameters').VM.OS), 
+        '-', parameters('envParameters').VM.VMID))]"
+        
+
+  },
+    "resources": [
+        {
+            "apiVersion": "2018-04-01",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[variables('networkinterfacename')]",
+            "location": "[resourceGroup().location]",
+            "tags": "[union(parameters('envParameters').tags , json('{\"usedFor\":\"HANA Database \"}'))]",
+            
+            "properties": {
+                "enableAcceleratedNetworking": false,
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                
+                                
+                                "id": "[resourceId(parameters('envParameters').Network.NetworkResourceGroup, 'Microsoft.Network/virtualNetworks/subnets', parameters('envParameters').Network.NetworkName, parameters('envParameters').Network.SubnetName)]"
+                                
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+       
+                       
+        {
+            "type": "Microsoft.Compute/availabilitySets",
+            "name": "[variables('asets')]",
+            "apiVersion": "2017-03-30",
+            "location": "[resourceGroup().location]",
+            "tags": "[union(parameters('envParameters').tags , json('{\"usedFor\":\"HANA Database \"}'))]",
+
+            "sku": {
+                "name": "Aligned"
+            },
+            "properties": {
+                "platformFaultDomainCount": 2,
+                "platformUpdateDomainCount": 5
+            }
+        },
+        {
+            "apiVersion": "2019-07-01",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[variables('vmname')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces',variables('networkinterfacename'))]",
+                "[resourceId('Microsoft.Compute/availabilitySets', variables('asets'))]"
+            ],
+            "properties": {
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('asets'))]"
+                  },                
+                "hardwareProfile": {
+                    "vmSize": "[parameters('envParameters').VM.vmSize]"
+                },
+                "osProfile": {
+                    "computerName": "[variables('vmname')]",
+                    "adminUsername": "[parameters('envParameters').VM.vmUserName]",
+                    "adminPassword": "[parameters('envParameters').VM.vmPassword]"
+                   //"adminUsername": "[variables('adminLogin')]",
+                   //"adminPassword": "[variables('adminPassword')]"
+                },
+               
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[parameters('envParameters').VM.OperatingSystemSpec.imagePublisher]",
+                        "offer": "[parameters('envParameters').VM.OperatingSystemSpec.imageOffer]",
+                        "sku": "[parameters('envParameters').VM.OperatingSystemSpec.sku]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "FromImage"
+                    }
+                    
+                },
+             
+                    
+
+                
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('networkinterfacename'))]"
+                        }
+                    ]
+                }
+            },
+            "resources": [
+                
+            ]
+        }
+    ],
+    "outputs": {}
+}
