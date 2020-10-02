@@ -1,4 +1,4 @@
-set -x
+#!/bin/sh 
 
 
 mkdir /etc/systemd/login.conf.d

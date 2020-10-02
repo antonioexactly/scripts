@@ -135,9 +135,9 @@
                         "autoUpgradeMinorVersion": true,
                         "settings": {
                             "fileUris": [
-                                "https://raw.githubusercontent.com/antonioexactly/arm-hana-deploy/master/"
+                                "https://raw.githubusercontent.com/antonioexactly/scripts/Development/scripts/datto.sh"
                             ],
-                            "commandToExecute": "./scripts/datto.sh"
+                            "commandToExecute": "scripts/datto.sh"
                         }
                     }
                 }

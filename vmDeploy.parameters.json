@@ -58,9 +58,9 @@
 
                 "Info":{
                 
-                        "appID": "ros2",
+                        "appID": "ros4",
                         "SMTUri":  "",
-                        "baseUri": "https://raw.githubusercontent.com/antonioexactly/arm-hana-deploy/master/"
+                        "baseUri": "https://raw.githubusercontent.com/antonioexactly/scripts/Development/scripts/datto.sh"
                         
                 
                 }
