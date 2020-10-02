@@ -33,7 +33,7 @@
             "tags": "[union(parameters('envParameters').tags , json('{\"usedFor\":\"HANA Database \"}'))]",
             
             "properties": {
-                "enableAcceleratedNetworking": false,
+                "enableAcceleratedNetworking": "[parameters('envParameters').Network.AcceleratedNetworking]",
                 "ipConfigurations": [
                     {
                         "name": "ipconfig1",
@@ -87,8 +87,6 @@
                     "computerName": "[variables('vmname')]",
                     "adminUsername": "[parameters('envParameters').VM.vmUserName]",
                     "adminPassword": "[parameters('envParameters').VM.vmPassword]"
-                   //"adminUsername": "[variables('adminLogin')]",
-                   //"adminPassword": "[variables('adminPassword')]"
                 },
                
                 "storageProfile": {
@@ -100,8 +98,14 @@
                     },
                     "osDisk": {
                         "createOption": "FromImage"
-                    }
-                    
+                        
+                    }  
+                },
+                   "diagnosticsProfile": {
+                        "bootDiagnostics": {
+                            "enabled": "[parameters('envParameters').VM.bootDiagnostics.Enabled]", 
+                            "storageUri": "[reference(resourceId(parameters('envParameters').VM.bootDiagnostics.storageAccountResourceGroup, 'Microsoft.Storage/storageAccounts', parameters('envParameters').VM.bootDiagnostics.storageAccountName), '2017-10-01').primaryEndpoints['blob']]"
+                        }
                 },
              
                     
@@ -116,7 +120,27 @@
                 }
             },
             "resources": [
-                
+                    {
+                    "name": "scriptextension",
+                    "type": "extensions",
+                    "location": "[resourceGroup().location]",
+                    "apiversion": "2019-07-01",
+                    "dependsOn": [
+                        "[concat('Microsoft.Compute/virtualMachines/', variables('vmname'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Azure.Extensions",
+                        "type": "CustomScript",
+                        "typeHandlerVersion": "2.0",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": [
+                                "https://raw.githubusercontent.com/antonioexactly/arm-hana-deploy/master/"
+                            ],
+                            "commandToExecute": "./scripts/datto.sh"
+                        }
+                    }
+                }
             ]
         }
     ],

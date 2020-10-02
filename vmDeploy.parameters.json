@@ -25,8 +25,8 @@
                     
                         "VMID":  "01",
                         "VMSize":  "Standard_D2_v3",
-                        "VMUserName":  "testuser",
-                        "VMPassword":  "YourPassword123.",
+                        "VMUserName":  "eitadmintest",
+                        "VMPassword":  "RS21011432.",
                         "OS":"linux",
                         "OperatingSystemSpec": {
                             "imagePublisher": "SUSE",
@@ -34,22 +34,33 @@
                             "sku": "12-SP4"
                         },
                         "diskReference":128,
-                        "storageAccountName":""
-                       
+                        
+                        "bootDiagnostics":{
+                            "Enabled": true,
+                            "storageAccountResourceGroup":"PolicyTest",
+                            "storageAccountName":"storageforaudir"
+                        }
+                                     
                 
                 },
+                
+
+                
 
                 "Network":{
                 
                         "NetworkName":  "lab-spk-vnet",
                         "SubnetName":  "Applications",
-                        "NetworkResourceGroup":"lab-net-rg"
+                        "NetworkResourceGroup":"lab-net-rg",
+                        "AcceleratedNetworking": false
                 
                 },
 
                 "Info":{
                 
-                        "appID": "ad"
+                        "appID": "ros2",
+                        "SMTUri":  "",
+                        "baseUri": "https://raw.githubusercontent.com/antonioexactly/arm-hana-deploy/master/"
                         
                 
                 }
