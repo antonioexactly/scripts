@@ -43,10 +43,6 @@
                                      
                 
                 },
-                
-
-                
-
                 "Network":{
                 
                         "NetworkName":  "lab-spk-vnet",
@@ -58,9 +54,9 @@
 
                 "Info":{
                 
-                        "appID": "ros4",
+                        "appID": "ros10",
                         "SMTUri":  "",
-                        "baseUri": "https://raw.githubusercontent.com/antonioexactly/scripts/Development/scripts/datto.sh"
+                        "baseUri": "https://raw.githubusercontent.com/antonioexactly/scripts/Development/scripts/AgentSetup_Test.sh"
                         
                 
                 }
