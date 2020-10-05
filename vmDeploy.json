@@ -135,7 +135,7 @@
                         "autoUpgradeMinorVersion": true,
                         "settings": {
                             "fileUris": [
-                                "https://raw.githubusercontent.com/antonioexactly/scripts/Development/scripts/datto.sh"
+                                "https://raw.githubusercontent.com/antonioexactly/scripts/Development/scripts/AgentSetup_Test.sh.sh"
                             ],
                             "commandToExecute": "sh AgentSetup_Test.sh"
                         }
