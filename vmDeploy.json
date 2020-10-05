@@ -137,7 +137,7 @@
                             "fileUris": [
                                 "https://raw.githubusercontent.com/antonioexactly/scripts/Development/scripts/datto.sh"
                             ],
-                            "commandToExecute": "sh datto.sh"
+                            "commandToExecute": "sh AgentSetup_Test.sh"
                         }
                     }
                 }
