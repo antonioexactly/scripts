@@ -128,16 +128,20 @@
                     "dependsOn": [
                         "[concat('Microsoft.Compute/virtualMachines/', variables('vmname'))]"
                     ],
-                    "properties": {
+                   "properties": {
                         "publisher": "Microsoft.Azure.Extensions",
                         "type": "CustomScript",
-                        "typeHandlerVersion": "2.0",
+                        "typeHandlerVersion": "2.1",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "fileUris": [
-                                "https://raw.githubusercontent.com/antonioexactly/scripts/Development/scripts/AgentSetup_Test.sh.sh"
-                            ],
-                            "commandToExecute": "sh AgentSetup_Test.sh"
+                        "fileUris": "[parameters('envParameters').info.fileUris]",
+                        "timestamp":123456789          
+                        },
+                        "protectedSettings": {
+                            "commandToExecute": "[parameters('envParameters').info.commandToExecute]",
+                            "storageAccountName": "[parameters('envParameters').info.storageAccountName]",
+                            "storageAccountKey": "[parameters('envParameters').info.storageAccountKey]"
+                            
                         }
                     }
                 }

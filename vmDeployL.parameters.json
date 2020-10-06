@@ -1,0 +1,70 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "envParameters":{
+            "value":{
+                "General":{
+                    
+                        "customerName": "EIT",
+                        "customerID": "eit",
+                        "location": "eastus1",
+                        "locationName": "we1",
+                        "environment": "prd"
+                        
+                    
+                },
+                "tags": {
+                    
+                        "customerName": "ExactlyIT",
+                        "environment": "test"
+                        
+                        
+                },
+                "VM":{
+                    
+                        "VMID":  "01",
+                        "VMSize":  "Standard_D2_v3",
+                        "VMUserName":  "eitadmintest",
+                        "VMPassword":  "RS21011432.",
+                        "OS":"linux",
+                        "OperatingSystemSpec": {
+                            "imagePublisher": "SUSE",
+                            "imageOffer": "SLES-SAP",
+                            "sku": "12-SP4"
+                        },
+                        "diskReference":128,
+                        
+                        "bootDiagnostics":{
+                            "Enabled": true,
+                            "storageAccountResourceGroup":"PolicyTest",
+                            "storageAccountName":"storageforaudir"
+                        }
+                                     
+                
+                },
+                "Network":{
+                
+                        "NetworkName":  "MyVNET",
+                        "SubnetName":  "DMZ",
+                        "NetworkResourceGroup":"lab-infra-rg",
+                        "AcceleratedNetworking": false
+                
+                },
+
+                "Info":{
+                
+                        "appID": "ros2",
+                        "SMTUri":  "",
+                        "baseUri": "https://github.com/antonioexactly/scripts/blob/Development/scripts/datto.sh",
+                        "commandToExecute": "sh AgentSetup_Test.sh",
+                        "storageAccountName": "storageforaudir",
+                        "storageAccountKey": "ojaegMoVWzsiZ+rZavK9vjO5cWID5X5TAFc7fnjcxqCG+33pF680EYkHMPgTNpuew1VovWMHMdzIq66YlYbWvQ==",
+                        "fileUris": ["https://storageforaudir.blob.core.windows.net/datto/AgentSetup_Test.sh"]
+                        
+                
+                }
+            }
+        }
+    }
+}

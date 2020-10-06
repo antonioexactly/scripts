@@ -27,11 +27,11 @@
                         "VMSize":  "Standard_D2_v3",
                         "VMUserName":  "eitadmintest",
                         "VMPassword":  "RS21011432.",
-                        "OS":"linux",
+                        "OS":"windows",
                         "OperatingSystemSpec": {
-                            "imagePublisher": "SUSE",
-                            "imageOffer": "SLES-SAP",
-                            "sku": "12-SP4"
+                            "imagePublisher": "MicrosoftWindowsServer",
+                            "imageOffer": "WindowsServer",
+                            "sku": "2019-Datacenter"
                         },
                         "diskReference":128,
                         
@@ -45,18 +45,21 @@
                 },
                 "Network":{
                 
-                        "NetworkName":  "lab-spk-vnet",
-                        "SubnetName":  "Applications",
-                        "NetworkResourceGroup":"lab-net-rg",
+                        "NetworkName":  "MyVNET",
+                        "SubnetName":  "DMZ",
+                        "NetworkResourceGroup":"lab-infra-rg",
                         "AcceleratedNetworking": false
                 
                 },
 
                 "Info":{
                 
-                        "appID": "ros10",
+                        "appID": "ros5",
                         "SMTUri":  "",
-                        "baseUri": "https://raw.githubusercontent.com/antonioexactly/scripts/Development/scripts/AgentSetup_Test.sh"
+                        "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File Install-Datto-Powershell-lummus.ps1",
+                        "storageAccountName": "storageforaudir",
+                        "storageAccountKey": "ojaegMoVWzsiZ+rZavK9vjO5cWID5X5TAFc7fnjcxqCG+33pF680EYkHMPgTNpuew1VovWMHMdzIq66YlYbWvQ==",
+                        "fileUris": ["https://storageforaudir.blob.core.windows.net/datto/Install-Datto-Powershell-lummus.ps1"]
                         
                 
                 }
