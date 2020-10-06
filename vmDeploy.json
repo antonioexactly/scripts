@@ -121,17 +121,17 @@
             },
             "resources": [
                     {
-                    "name": "scriptextension",
-                    "type": "extensions",
+                    "apiVersion": "2018-06-01",
+                    "type": "Microsoft.Compute/virtualMachines/extensions",
+                    "name": "virtualMachineName/config-app",
                     "location": "[resourceGroup().location]",
-                    "apiversion": "2019-07-01",
                     "dependsOn": [
                         "[concat('Microsoft.Compute/virtualMachines/', variables('vmname'))]"
                     ],
                    "properties": {
-                        "publisher": "Microsoft.Azure.Extensions",
-                        "type": "CustomScript",
-                        "typeHandlerVersion": "2.1",
+                        "publisher": "Microsoft.Compute",
+                        "type": "CustomScriptExtension",
+                        "typeHandlerVersion": "1.10",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
                         "fileUris": "[parameters('envParameters').info.fileUris]",

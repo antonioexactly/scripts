@@ -54,9 +54,9 @@
 
                 "Info":{
                 
-                        "appID": "ros5",
+                        "appID": "ros7",
                         "SMTUri":  "",
-                        "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File Install-Datto-Powershell-lummus.ps1",
+                        "commandToExecute": "powershell.exe  -File Install-Datto-Powershell-lummus.ps1",
                         "storageAccountName": "storageforaudir",
                         "storageAccountKey": "ojaegMoVWzsiZ+rZavK9vjO5cWID5X5TAFc7fnjcxqCG+33pF680EYkHMPgTNpuew1VovWMHMdzIq66YlYbWvQ==",
                         "fileUris": ["https://storageforaudir.blob.core.windows.net/datto/Install-Datto-Powershell-lummus.ps1"]
