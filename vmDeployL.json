@@ -119,30 +119,34 @@
                     ]
                 }
             },
-            "resources": [
-                    {
-                    "apiVersion": "2018-06-01",
-                    "type": "Microsoft.Compute/virtualMachines/extensions",
-                    "name": "virtualMachineName/config-app",
+            
+
+           "resources": [
+                               {
+                    "name": "scriptextension",
+                    "type": "extensions",
                     "location": "[resourceGroup().location]",
+                    "apiversion": "2019-03-01",
                     "dependsOn": [
                         "[concat('Microsoft.Compute/virtualMachines/', variables('vmname'))]"
                     ],
-                   "properties": {
-                        "publisher": "Microsoft.Compute",
-                        "type": "CustomScriptExtension",
-                        "typeHandlerVersion": "1.10",
+                    "properties": {
+                        "publisher": "Microsoft.Azure.Extensions",
+                        "type": "CustomScript",
+                        "typeHandlerVersion": "2.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                        "fileUris": "[parameters('envParameters').info.fileUris]",
-                        "timestamp":123456789          
+                             "skipDos2Unix":false,
+                             "timestamp":123456789  
                         },
-                        "protectedSettings": {
-                            "commandToExecute": "[parameters('envParameters').info.commandToExecute]",
-                            "storageAccountName": "[parameters('envParameters').info.storageAccountName]",
-                            "storageAccountKey": "[parameters('envParameters').info.storageAccountKey]"
-                            
-                        }
+                        
+                            "protectedSettings": {
+                                "commandToExecute": "[parameters('envParameters').info.commandToExecute]",
+                                "storageAccountName": "[parameters('envParameters').info.storageAccountName]",
+                                "storageAccountKey": "[parameters('envParameters').info.storageAccountKey]",
+                                "fileUris": "[parameters('envParameters').info.fileUris]"
+                            }    
+                        
                     }
                 }
             ]

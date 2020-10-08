@@ -54,13 +54,12 @@
 
                 "Info":{
                 
-                        "appID": "ros2",
-                        "SMTUri":  "",
+                        "appID": "ros1",
                         "baseUri": "https://github.com/antonioexactly/scripts/blob/Development/scripts/datto.sh",
-                        "commandToExecute": "sh AgentSetup_Test.sh",
+                        "commandToExecute": "sh datto.sh",
                         "storageAccountName": "storageforaudir",
                         "storageAccountKey": "ojaegMoVWzsiZ+rZavK9vjO5cWID5X5TAFc7fnjcxqCG+33pF680EYkHMPgTNpuew1VovWMHMdzIq66YlYbWvQ==",
-                        "fileUris": ["https://storageforaudir.blob.core.windows.net/datto/AgentSetup_Test.sh"]
+                        "fileUris": ["https://storageforaudir.blob.core.windows.net/datto/datto.sh"]
                         
                 
                 }
